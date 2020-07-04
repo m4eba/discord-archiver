@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import moment from 'moment';
 import Debug from 'debug';
 import { Config } from './Config';
