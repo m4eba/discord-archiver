@@ -6,6 +6,7 @@ export interface Config {
   bot: boolean;
   channel: Array<string>;
   guild: string;
+  exclude: Array<string>;
   history: boolean;
   historyUntil: string;
 }
@@ -15,6 +16,7 @@ export const defaultConfig: Config = {
   bot: false,
   channel: [],
   guild: '',
+  exclude: [],
   history: true,
   historyUntil: '',
 };

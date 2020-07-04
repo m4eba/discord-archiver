@@ -3,6 +3,7 @@ import moment from 'moment';
 import Debug from 'debug';
 import { Config } from './Config';
 import { FileSystem } from './FileSystem';
+import { request } from './Api';
 
 const debug = Debug('Channel');
 
@@ -110,22 +111,8 @@ export class Channel {
         param = `&after=${after}`;
       }
     }
-    const url = `https://discordapp.com/api/v6/channels/${this.channel}/messages?limit=100${param}`;
-    debug('request %s', url);
-    let headers = {
-      Authorization: this.config.token,
-    };
-    if (this.config.bot === true) {
-      headers.Authorization = `Bot ${this.config.token}`;
-    }
-    const resp = await fetch(url, {
-      headers: headers,
-    });
-    const obj = await resp.json();
-    if (obj.code && obj.message) {
-      //error
-      throw new Error(obj.message);
-    }
+    const url = `channels/${this.channel}/messages?limit=100${param}`;
+    const obj = await request(this.config, url);
     const messages = obj as Array<Message>;
     debug('result size %d', messages.length);
     return messages.reverse();
