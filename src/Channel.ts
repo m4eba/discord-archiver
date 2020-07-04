@@ -112,11 +112,14 @@ export class Channel {
     }
     const url = `https://discordapp.com/api/v6/channels/${this.channel}/messages?limit=100${param}`;
     debug('request %s', url);
+    let headers = {
+      Authorization: this.config.token,
+    };
+    if (this.config.bot === true) {
+      headers.Authorization = `Bot ${this.config.token}`;
+    }
     const resp = await fetch(url, {
-      headers: {
-        // TODO suport bot token
-        Authorization: this.config.token,
-      },
+      headers: headers,
     });
     const obj = await resp.json();
     if (obj.code && obj.message) {
