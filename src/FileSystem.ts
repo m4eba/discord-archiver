@@ -74,13 +74,19 @@ export class FileSystem {
     return f;
   }
 
-  public newestMessageId(): string {
-    return this.session.newest.id;
+  public newestMessage(): Message {
+    return {
+      id: this.session.newest.id,
+      timestamp: this.session.newest.timestamp,
+    };
   }
 
-  public oldestMessageId(): string | null {
+  public oldestMessage(): Message | null {
     if (this.session.oldest === null) return null;
-    return this.session.oldest.id;
+    return {
+      id: this.session.oldest.id,
+      timestamp: this.session.oldest.timestamp,
+    };
   }
 
   private async generateSession() {
@@ -271,7 +277,6 @@ export class FileSystem {
   }
 
   public async flush() {
-    console.log('flushing filesystem');
     await this.flushNewest();
     await this.flushOldest();
     await this.saveSession();
@@ -331,7 +336,6 @@ export class FileSystem {
       const files = await fs.promises.readdir(dir);
       return files.filter((f) => f.match(filter)).sort(fn);
     }
-    console.log('root', this.root);
     const years = await part(this.root, /^\d\d\d\d$/);
     if (years.length === 0) return '';
     const months = await part(path.join(this.root, years[0]), /^\d\d$/);

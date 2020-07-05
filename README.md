@@ -1,4 +1,4 @@
-Incremental discord archiver. It saves the raw json data into a folder structured like: channelId/YYYY/MM/YYYYMMDD.json. Progress for every channel is saved in a session.json file.
+Incremental discord archiver. It saves the raw json data into a folder structured like: channel-id/YYYY/MM/YYYYMMDD.json. Progress for every channel is saved in a session.json file.
 
 #### Install
 
@@ -12,7 +12,7 @@ npm run compile
 #### Usage
 
 ```bash
-DEBUG=* node build/index.js <folder>
+node build/index.js <folder>
 ```
 
 Inside the folder you need a config.json file like:
@@ -42,4 +42,4 @@ Minimal config is token and either channel or guild.
 #### TODO
 
 - api ratelimit???
-- proper console output
+- ~~proper console output~~
