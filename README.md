@@ -1,4 +1,4 @@
-Incremental discord archiver. It saves the raw json data into a folder structured like: <channel id>/YYYY/MM/YYYYMMDD.json. Progress for every channel is saved in a session.json file.
+Incremental discord archiver. It saves the raw json data into a folder structured like: channelId/YYYY/MM/YYYYMMDD.json. Progress for every channel is saved in a session.json file.
 
 #### Install
 
