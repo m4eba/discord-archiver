@@ -15,7 +15,7 @@ npm run compile
 DEBUG=* node build/index.js <folder>
 ```
 
-Inside folder you need a config.json file like:
+Inside the folder you need a config.json file like:
 
 ```json
 {
@@ -29,13 +29,15 @@ Inside folder you need a config.json file like:
 }
 ```
 
-token: user token, open devtools then to go Application tab and find the token in Local Storage
-bot: boolean, if token is a bot token
-channel: array of channel ids to archive, enable the developer mode in the discord app and right click on a channel and copy id
-guild: id of server, archives all channels
-exclude: optional, array of channel ids to exclude if using guild option
-history: boolean, archive older messages
-historyUntil: optional, only go back to this date, format is YYYYMMDD
+Minimal config is token and either channel or guild.
+
+- token: bot token or user token, open devtools then to go Application tab and find the token in Local Storage
+- bot: boolean, defaults to false, token is a bot token
+- channel: array of channel ids to archive, enable the developer mode in the discord app and right click on a channel and copy id
+- guild: id of server, archives all channels
+- exclude: optional, array of channel ids to exclude if using guild option
+- history: boolean, defaults to true, archive older messages
+- historyUntil: optional, only go back to this date, format is YYYYMMDD
 
 #### TODO
 
