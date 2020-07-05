@@ -145,6 +145,13 @@ export class FileSystem {
 
   public async initMessages(messages: Array<Message>) {
     debug('initMessages');
+    const newM = messages[messages.length - 1];
+    this.session.newest = {
+      id: newM.id,
+      timestamp: newM.timestamp,
+      date: timestampToDate(newM.timestamp),
+      filePath: timestampToFilePath(newM.timestamp),
+    };
     this.session.oldest = {
       id: messages[0].id,
       timestamp: messages[0].timestamp,
