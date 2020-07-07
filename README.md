@@ -25,19 +25,21 @@ Inside the folder you need a config.json file like:
   "guild": "<guild id",
   "exclude": ["<channel id>"],
   "history": true,
-  "historyUntil": "20200101"
+  "historyUntil": "20200101",
+  "concurrent": 3
 }
 ```
 
 Minimal config is token and either channel or guild.
 
 - token: bot token or user token, open devtools then to go Application tab and find the token in Local Storage
-- bot: boolean, defaults to false, token is a bot token
+- bot: boolean, default false, token is a bot token
 - channel: array of channel ids to archive, enable the developer mode in the discord app and right click on a channel and copy id
 - guild: id of server, archives all channels
 - exclude: optional, array of channel ids to exclude if using guild option
-- history: boolean, defaults to true, archive older messages
+- history: boolean, default true, archive older messages
 - historyUntil: optional, only go back to this date, format is YYYYMMDD
+- concurrent: optional, default 1, number of concurrent downloads
 
 #### TODO
 

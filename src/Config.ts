@@ -9,6 +9,7 @@ export interface Config {
   exclude: Array<string>;
   history: boolean;
   historyUntil: string;
+  concurrent: number;
 }
 
 export const defaultConfig: Config = {
@@ -19,6 +20,7 @@ export const defaultConfig: Config = {
   exclude: [],
   history: true,
   historyUntil: '',
+  concurrent: 1,
 };
 
 export async function load(out: string): Promise<Config> {

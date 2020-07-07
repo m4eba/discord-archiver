@@ -41,7 +41,7 @@ export class Archiver {
       const channel = new Channel(this.out, c, fsys, this.config);
       tasks.push(channel);
     }
-    const listr = new Listr<Ctx>(tasks);
+    const listr = new Listr<Ctx>(tasks, { concurrent: this.config.concurrent });
     await listr.run();
   }
 
