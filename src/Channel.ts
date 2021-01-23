@@ -29,7 +29,11 @@ export class Channel implements ListrTask<any, any> {
     // eslint-disable-next-line no-unused-vars
     return async (ctx: any, task: ListrTaskWrapper<any, any>) => {
       this.taskWrapper = task;
-      await this.start();
+      try {
+        await this.start();
+      } catch (e) {
+        task.skip(e);
+      }
       await this.fileSystem.flush();
     };
   }
