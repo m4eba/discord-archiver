@@ -261,7 +261,7 @@ export class FileSystem {
       }
 
       const filepath = path.join(this.root, dateToFilePath(g.date));
-      debug('file to save',filepath);
+      debug('file to save', filepath);
       const exists = await fileExists(filepath);
       if (exists) {
         debug('file already exists');
