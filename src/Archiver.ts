@@ -1,4 +1,6 @@
-import { Listr } from 'listr2';
+import { Listr, ListrBaseClassOptions } from 'listr2';
+// @ts-ignore
+import VerboseRender from 'listr-verbose-renderer';
 import { Config, load, defaultConfig } from './Config';
 import Channel from './Channel';
 import { FileSystem } from './FileSystem';
@@ -21,16 +23,24 @@ export class Archiver {
   public async start() {
     this.config = await load(this.out);
 
+    let opt: ListrBaseClassOptions = { concurrent: this.config.concurrent };
+    if (process.env['DEBUG'] !== undefined) {
+      opt.renderer = VerboseRender;
+    }
+
     let channels = this.config.channel;
     if (this.config.guild.length > 0) {
-      const tasks = new Listr<Ctx>([
-        {
-          title: 'get channels',
-          task: async (): Promise<void> => {
-            channels = await this.guild(this.config.guild);
+      const tasks = new Listr<Ctx>(
+        [
+          {
+            title: 'get channels',
+            task: async (): Promise<void> => {
+              channels = await this.guild(this.config.guild);
+            },
           },
-        },
-      ]);
+        ],
+        opt
+      );
       await tasks.run({});
     }
 
@@ -41,7 +51,7 @@ export class Archiver {
       const channel = new Channel(this.out, c, fsys, this.config);
       tasks.push(channel);
     }
-    const listr = new Listr<Ctx>(tasks, { concurrent: this.config.concurrent });
+    const listr = new Listr<Ctx>(tasks, opt);
     await listr.run();
   }
 
