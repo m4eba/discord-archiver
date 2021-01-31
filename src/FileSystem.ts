@@ -200,7 +200,7 @@ export class FileSystem {
         }
       }
 
-      const filepath = dateToFilePath(g.date);
+      const filepath = path.join(this.root, dateToFilePath(g.date));
       const exists = await fileExists(filepath);
       if (exists) {
         debug('file already exists');
@@ -232,6 +232,7 @@ export class FileSystem {
     }
     debug('appendMessages %d', messages.length);
     const groups = groupMessages(messages);
+    debug('groups %d', groups.length);
     for (let i = 0; i < groups.length; ++i) {
       const g = groups[i];
       debug('processing group %d %d/%d', g.date, i, groups.length);
@@ -259,7 +260,8 @@ export class FileSystem {
         }
       }
 
-      const filepath = dateToFilePath(g.date);
+      const filepath = path.join(this.root, dateToFilePath(g.date));
+      debug('file to save',filepath);
       const exists = await fileExists(filepath);
       if (exists) {
         debug('file already exists');
