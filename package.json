@@ -39,7 +39,7 @@
     "enquirer": "^2.3.6",
     "listr-verbose-renderer": "^0.6.0",
     "listr2": "^2.2.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "node-fetch": "^2.6.0"
   },
   "husky": {
